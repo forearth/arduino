@@ -1,22 +1,18 @@
-#include <Adafruit_NeoPixel.h>
-
-#define lightPin A0
-#define ledVccPin 8
-#define ledDataPin 9
-#define numPixel 1
-#define TRIG 2
-#define ECHO 3
-
-Adafruit_NeoPixel pixels=Adafruit_NeoPixel(numPixel, ledDataPin, NEO_GRB+NEO_KHZ800);
+//변수설정
+int TRIG = 2;
+int ECHO = 3;
+int redPin = 11;
+int greenPin = 10;
+int bluePin = 9;
 
 void setup() {
   //set serial
   Serial.begin(9600);
 
   //set led
-  pinMode(ledVccPin, OUTPUT);
-  pinMode(ledDataPin, OUTPUT);
-  pixels.begin();
+   pinMode(redPin, OUTPUT);
+   pinMode(greenPin, OUTPUT);
+   pinMode(bluePin, OUTPUT); 
   
   //set ultrasonic
   pinMode(TRIG, OUTPUT);
@@ -24,13 +20,6 @@ void setup() {
 }
 
 void loop() {
-  //set light sensor scope
-  int light_value;
-  light_value=map(analogRead(lightPin), 0, 1023, 0, 255);
-  Serial.println(light_value); 
-
-  //화장실에 불이 켜지면, 초음파 센서를 작동해서 아이가 있는지 확인  
-      if(light_value > 200){
     //초음파 발사 코드
     digitalWrite(TRIG, LOW);
     delayMicroseconds(2);
@@ -42,18 +31,16 @@ void loop() {
     //음파속도가 340m/s 정도임
     long distance=pulseIn(ECHO, HIGH)/58.2;
 
-    if(distance < 50){
-      digitalWrite(ledVccPin, HIGH);    
-      //set led color
-      pixels.setPixelColor(0, pixels.Color(0, 200, 0));
-      pixels.show();
+  if(distance <70){
+    setColor(255, 0, 0); // red
     } else{
-      digitalWrite(ledVccPin, HIGH);    
-      //set led color
-      pixels.setPixelColor(0, pixels.Color(250, 0, 0));
-      pixels.show();
+      setColor(0, 255, 0); // green
     }
-  } else{
-    digitalWrite(ledVccPin, LOW);    
-  }
+}
+
+void setColor(int red, int green, int blue)
+{
+  analogWrite(redPin, 255-red);
+  analogWrite(greenPin, 255-green);
+  analogWrite(bluePin, 255-blue); 
 }
