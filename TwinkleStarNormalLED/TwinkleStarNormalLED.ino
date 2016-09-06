@@ -4,7 +4,7 @@ SoftwareSerial mySerial(2,3); //RX, TX
 
 #define fadeStar1 9
 #define fadeStar2 10
-
+#define fadeStar3 11
 
 void setup() {
   // put your setup code here, to run once:
@@ -31,6 +31,9 @@ void loop() {
         break;
       case '3':
         star3();
+        break;
+      case '4':
+        star4();
         break;
       default:
         return;
@@ -65,10 +68,30 @@ void star2(){
   }  
 }
 
-  void star3(){
-    digitalWrite(fadeStar1, HIGH);
-    digitalWrite(fadeStar2, HIGH);    
+void star3(){
+  for(int fadeValue=0; fadeValue<=255; fadeValue+=5){
+    analogWrite(fadeStar3, fadeValue);
+    delay(30);
   }
+  for(int fadeValue=255; fadeValue>=0; fadeValue-=5){
+    analogWrite(fadeStar3, fadeValue);
+    delay(30);
+  }  
+}
 
 
+void star4(){
+  for(int fadeValue=0; fadeValue<=255; fadeValue+=5){
+    analogWrite(fadeStar1, fadeValue);
+    analogWrite(fadeStar2, fadeValue);
+    analogWrite(fadeStar3, fadeValue);
+    delay(30);
+  }
+  for(int fadeValue=255; fadeValue>=0; fadeValue-=5){
+    analogWrite(fadeStar1, fadeValue);
+    analogWrite(fadeStar2, fadeValue);
+    analogWrite(fadeStar3, fadeValue);
+    delay(30);
+  }  
+}
 
