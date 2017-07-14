@@ -11,11 +11,11 @@ void setup()
  
 void loop()
 {
-  setColor(0, 0, 255); // red
+  setColor(0, 0, 255); //blue
   delay(2000);
   setColor(0, 255, 0); //green
   delay(2000);
-  setColor(255, 0, 0); // blue.
+  setColor(255, 0, 0); //red
   delay(2000);
 }
  
