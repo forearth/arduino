@@ -49,13 +49,22 @@ void loop() {
     digitalWrite(led2, HIGH);
     BTSerial.write("Congratulation!!!"); // 스마트폰으로 축하메시지 보내기
     delay(5000);                         // 5초간 불켜기
-  }else{
+  }else if(gamer_sense_value > standard_val){
+    BTSerial.write("Down!!!\n"); // 스마트폰으로 힌트메시지 보내기
     digitalWrite(led2, LOW);
-    if(val>standard_val){
-       BTSerial.write("Down!!!\n"); // 스마트폰으로 힌트메시지 보내기
-    }else{
-       BTSerial.write("Up!!!\n"); // 스마트폰으로 힌트메시지 보내기      
-    }   
+  }
+  else{
+    BTSerial.write("Up!!!\n"); // 스마트폰으로 힌트메시지 보내기
+    digitalWrite(led2, LOW);
+  }
+
+  //조도센서 값에 따른 힌트 메시지 제공
+  if(val==standard_val){
+     BTSerial.write("Right!!!\n"); // 스마트폰으로 힌트메시지 보내기
+  }else if(val>standard_val){
+     BTSerial.write("Up!!!\n"); // 스마트폰으로 힌트메시지 보내기      
+  }else{
+     BTSerial.write("Down!!!\n"); // 스마트폰으로 힌트메시지 보내기
   }
   
   //버퍼 초기화
