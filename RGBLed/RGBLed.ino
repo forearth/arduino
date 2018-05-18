@@ -1,12 +1,12 @@
-int redPin = 9;
-int greenPin = 10;
-int bluePin = 11;
+#define RED 9
+#define GREEN 10
+#define BLUE 11
  
 void setup()
 {
- pinMode(redPin, OUTPUT);
- pinMode(greenPin, OUTPUT);
- pinMode(bluePin, OUTPUT); 
+ pinMode(RED, OUTPUT);
+ pinMode(GREEN, OUTPUT);
+ pinMode(BLUE, OUTPUT); 
 }
  
 void loop()
@@ -21,7 +21,7 @@ void loop()
  
 void setColor(int red, int green, int blue)
 {
-  analogWrite(redPin, 255-red);
-  analogWrite(greenPin, 255-green);
-  analogWrite(bluePin, 255-blue); 
+  analogWrite(RED, 255-red);
+  analogWrite(GREEN, 255-green);
+  analogWrite(BLUE, 255-blue); 
 }
