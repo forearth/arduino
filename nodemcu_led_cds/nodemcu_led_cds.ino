@@ -114,7 +114,7 @@ void loop() {
     digitalWrite(LED, LOW);
     delay(1000);
   }else{
-    lastStatus="OFF";
+    digitalWrite(LED, LOW);
   }
 
   // 조도센서 값을 fees/photocell로 publish  
